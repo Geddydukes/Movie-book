@@ -18,6 +18,7 @@ def profile(request, profile_id):
     profile = Profile.objects.get(id=profile_id)
     return render(request , 'profile/index.html', {'profile': profile})
 
+
 def signup(request):
     error_message = ''
     if request.method == 'POST':
@@ -50,3 +51,4 @@ def add_photo(request, profile_id):
         except:
             print('An error occured uploading file to S3')
     return redirect('profile', profile_id=profile_id)
+
