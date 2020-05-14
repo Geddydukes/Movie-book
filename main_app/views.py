@@ -4,9 +4,9 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Photo, Movie, Profile, Comment
 import uuid
 import boto3
+from .secret import key
 
-
-
+# Used for uploading photos to AWS S3
 S3_BASE_URL = 'https://s3.dualstack.us-west-1.amazonaws.com/'
 BUCKET = 'movie-book-profiles'
 # Create your views here.
@@ -33,6 +33,10 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 
+
+
+
+# logic for uploading photos to AWS S3
 def add_photo(request, profile_id):
     photo_file = request.FILES.get('photo-file', None)
     print(photo_file)
