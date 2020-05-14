@@ -1,0 +1,22 @@
+nav{
+    display: flex;
+    flex-direction: column;
+   
+}
+
+.movie{
+   display: flex; 
+}
+
+.profile-info{
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 150px;
+    
+}
+
+.profile-name{
+    display: flex;
+    flex-direction: column;
+}
+
