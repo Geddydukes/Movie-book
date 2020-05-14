@@ -40,4 +40,4 @@ class Photo(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Photo for article_id: {self.article_id} @{self.url}"
+        return f"Photo for profile_id: {self.profile_id} @{self.url}"
