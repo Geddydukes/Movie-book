@@ -1,15 +1,17 @@
-<<<<<<< HEAD
 nav{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
    
 }
 
 .movie{
    display: flex; 
+   justify-content: space-evenly;
 }
 
 .profile-info{
+    
+    border: 2px solid #919194;
     display: flex;
     justify-content: space-evenly;
     margin-bottom: 150px;
@@ -21,49 +23,6 @@ nav{
     flex-direction: column;
 }
 
-=======
-body{
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  
-  list-style: none;
-  
+.profile button{
+    justify-content: center;
 }
-nav{
-  font-family: montserrat;
-  background: #0082e6;
-  height: 80px;
-  width: 100%;
-}
-label.logo{
-  color: white;
-  font-size: 35px;
-  line-height: 80px;
-  padding: 0 70px; 
-  font-weight: bold;
-}
-
-nav ul {
-  float: right;
-  margin-right: 20px;
-
-}
-nav ul li{
-  display: inline-block;
-  line-height: 60px;
-  /* margin: 0 30px; */
-}
-nav ul li a {
-  color: white;
-  font-size: 17px;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 7px 13px;
-  border-radius: 3px;
-}
- a:hover{
-  background: #1b9bff;
-  transition: .5s;
-}
->>>>>>> dev
