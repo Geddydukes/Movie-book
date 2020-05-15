@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Photo, Movie, Profile, Comment
 import uuid
 import boto3
+from .forms import CommentForm
 
 
 
@@ -34,6 +35,10 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 
+
+
+
+# logic for uploading photos to AWS S3
 def add_photo(request, profile_id):
     photo_file = request.FILES.get('photo-file', None)
     print(photo_file)
@@ -52,3 +57,13 @@ def add_photo(request, profile_id):
             print('An error occured uploading file to S3')
     return redirect('profile', profile_id=profile_id)
 
+
+
+
+def add_comment_to_movie(request, api_id):
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        new_comment = form.save(commit=False)
+        new_comment.api_id = api_id
+        new_comment.save()
+        return redirect('profile', api_id=api_id)
