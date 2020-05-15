@@ -19,6 +19,7 @@
 
   <button type="submit" class="save btn btn-default">Send</button>
 </form>
+{% if comments %}
 {% for comment in comments %}
 <div class="comment">
   <div class="date">{{ comment.created_date }}</div>
@@ -29,5 +30,5 @@
 {% empty %}
 <p>No comments here yet :(</p>
 {% endfor %}
-
+{% endif %}
 {% endblock  %}
