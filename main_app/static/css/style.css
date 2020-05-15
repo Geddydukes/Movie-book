@@ -23,11 +23,13 @@ label.logo{
 nav ul {
   float: right;
   margin-right: 20px;
+  margin-top: 10px;
 
 }
 nav ul li{
   display: inline-block;
   line-height: 60px;
+
   /* margin: 0 30px; */
 }
 nav ul li a {
@@ -38,7 +40,7 @@ nav ul li a {
   padding: 7px 13px;
   border-radius: 3px;
 }
- a:hover{
-  background: #1b9bff;
+ /* a:hover{
+  /* background: #1b9bff; */
   transition: .5s;
-}
+} */
