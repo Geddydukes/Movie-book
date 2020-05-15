@@ -99,4 +99,12 @@ def edit_profile(request, profile_id):
       return redirect('profile', profile_id=profile_id)
   else:
     form = ProfileForm(instance=profile_id)
-    return render(request, 'profile/edit.html', {'form': form, 'profile': profile})         
+    return render(request, 'profile/edit.html', {'form': form, 'profile': profile})
+
+
+def delete_profile(request, profile_id):
+  profile = Profile.objects.get(id=profile_id)
+  profile.delete()
+  return redirect('index')
+
+  
