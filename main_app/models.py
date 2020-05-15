@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 from django.contrib.auth.models import User
@@ -18,6 +19,8 @@ class Profile(models.Model):
     email = models.EmailField()
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
+    # added the use foriegn key
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.display_name
 

@@ -102,6 +102,7 @@ def edit_profile(request, profile_id):
       return redirect('profile', profile_id=profile_id)
   else:
     form = ProfileForm(instance=profile_id)
+<<<<<<< HEAD
     return render(request, 'profile/edit.html', {'form': form, 'profile': profile})         
 
 
@@ -112,3 +113,15 @@ def movie_details(request, movie_name):
     comments = Comment.objects.get(film=movie_name)
     print(found_movie)
     return render(request, 'movie/details.html', {'movie': found_movie, 'comment_form': comment_form})
+=======
+    return render(request, 'profile/edit.html', {'form': form, 'profile': profile})
+
+
+def delete_profile(request, profile_id):
+  profile = Profile.objects.get(id=profile_id)
+  profile.delete()
+  return redirect('index')
+
+  
+
+>>>>>>> dev
