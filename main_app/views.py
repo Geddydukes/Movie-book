@@ -4,9 +4,10 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Photo, Movie, Profile, Comment
 import uuid
 import boto3
-from .secret import key
+from .forms import CommentForm
 
-# Used for uploading photos to AWS S3
+
+
 S3_BASE_URL = 'https://s3.dualstack.us-west-1.amazonaws.com/'
 BUCKET = 'movie-book-profiles'
 # Create your views here.
@@ -56,3 +57,13 @@ def add_photo(request, profile_id):
             print('An error occured uploading file to S3')
     return redirect('profile', profile_id=profile_id)
 
+
+
+
+def add_comment_to_movie(request, api_id):
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        new_comment = form.save(commit=False)
+        new_comment.api_id = api_id
+        new_comment.save()
+        return redirect('profile', api_id=api_id)

@@ -1,5 +1,7 @@
 .env/
 secret.py
+etc/
+
 ### Django ###
 *.log
 *.pot
