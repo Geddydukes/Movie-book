@@ -1,10 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
+from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from .models import Photo, Movie, Profile, Comment
 import uuid
 import boto3
-from .forms import CommentForm
+from .forms import CommentForm, ProfileForm
+
+
+
 
 
 
@@ -15,9 +19,26 @@ BUCKET = 'movie-book-profiles'
 def home(request):
     return render(request, 'home.html')
 
+
 def profile(request, profile_id):
     profile = Profile.objects.get(id=profile_id)
     return render(request , 'profile/index.html', {'profile': profile})
+
+def new_profile(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            return redirect('profile', profile.id)
+    else: 
+        form = ProfileForm()
+        context = {'form': form}
+        return render(request, 'profile/new.html', context)
+
+
+
 
 
 def signup(request):
