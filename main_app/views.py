@@ -88,3 +88,15 @@ def add_comment_to_movie(request, api_id):
         new_comment.api_id = api_id
         new_comment.save()
         return redirect('profile', api_id=api_id)
+
+
+def edit_profile(request, profile_id):
+  profile = Profile.objects.get(id=profile_id)
+  if request.method == 'POST':
+    form = ProfileForm(request.POST, instance=profile)
+    if form.is_valid():
+      profile = form.save()
+      return redirect('profile', profile_id=profile_id)
+  else:
+    form = ProfileForm(instance=profile_id)
+    return render(request, 'profile/edit.html', {'form': form, 'profile': profile})         
