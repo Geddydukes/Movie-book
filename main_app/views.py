@@ -114,7 +114,15 @@ def movie_details(request, movie_name):
     comment_form = CommentForm()
     movie = Movie()
     found_movie = movie.search(movie_name)[0]
+    poster_path = found_movie.poster_path[1:]
+    similar = movie.similar(found_movie.id)
+    print(found_movie.id)
     comments = Comment.objects.filter(film=movie_name)
     print(found_movie)
-    return render(request, 'movie/details.html', {'movie': found_movie, 'comment_form': comment_form, 'comments': comments})
+    context = {'movie': found_movie, 
+    'comment_form': comment_form, 
+    'comments': comments, 
+    'poster_path': poster_path,
+    'similar': similar}
+    return render(request, 'movie/details.html', context)
 
