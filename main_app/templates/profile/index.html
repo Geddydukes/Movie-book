@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block style%}
+  <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
 
 {% block content %}
     <div>
@@ -18,15 +23,7 @@
         <h3>fullname:</h3><span>Profile full name</span>
         <h3>Username:</h3><span>Profile email</span>
          <h3>Favorite movies:</h3>
-        <div class="card" style="width: 18rem;">
-        <img src="https://picsum.photos/200" class="card-img-top" alt="movie title">
-        {% comment %} add a loop to loop thruough thir favorite movies {% endcomment %}
-        <div class="card-body">
-            <h5 class="card-title">movie title</h5>
-            <p class="card-text">your riview and rating</p>
-            <a href="#" class="btn btn-primary">see more detals</a>
-        </div>
-        <div>
+      
             <button>Edit</button>
         </div>
         <div>

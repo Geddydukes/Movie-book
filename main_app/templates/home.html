@@ -1,5 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block style%}
+   <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+{% endblock %}
 
 {% block content%}
-<h1>Welcome To Movie Books </h1>
+<div class = 'welcome'>  
+    <h2>Welcome To Movie Books </h2>
+       <p> A social media site for movie lovers
+</div>
 {% endblock %}
