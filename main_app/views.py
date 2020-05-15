@@ -108,3 +108,4 @@ def delete_profile(request, profile_id):
   return redirect('index')
 
   
+

@@ -1,46 +1,34 @@
-body{
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  
-  list-style: none;
-  
-}
 nav{
-  font-family: montserrat;
-  background: #0082e6;
-  height: 80px;
-  width: 100%;
-}
-label.logo{
-  color: white;
-  font-size: 35px;
-  line-height: 80px;
-  padding: 0 70px; 
-  font-weight: bold;
+    display: flex;
+    flex-direction: row;
+   
 }
 
 nav ul {
   float: right;
   margin-right: 20px;
   margin-top: 10px;
-
 }
+.profile-info{
+    
+    border: 2px solid #919194;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 150px;
+    
+}
+
 nav ul li{
   display: inline-block;
   line-height: 60px;
 
   /* margin: 0 30px; */
 }
-nav ul li a {
-  color: white;
-  font-size: 17px;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 7px 13px;
-  border-radius: 3px;
+
+.profile button{
+    justify-content: center;
 }
- /* a:hover{
-  /* background: #1b9bff; */
+ a:hover{
+  background: #1b9bff;
   transition: .5s;
-} */
+}
