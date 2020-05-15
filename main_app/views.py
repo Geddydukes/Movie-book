@@ -2,13 +2,16 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
-from .models import Photo, Movie, Profile, Comment
+from .models import Photo, Film, Profile, Comment
 import uuid
 import boto3
 from .forms import CommentForm, ProfileForm
 
-
-
+from tmdbv3api import TMDb, Movie
+tmdb = TMDb()
+tmdb.api_key = '5cc2c3fe2401b50f702a6631a34199d2'
+tmdb.language = 'en'
+tmdb.debug = True
 
 
 
@@ -81,13 +84,13 @@ def add_photo(request, profile_id):
 
 
 
-def add_comment_to_movie(request, api_id):
+def add_comment_to_movie(request, movie_name):
     form = CommentForm(request.POST)
     if form.is_valid():
         new_comment = form.save(commit=False)
-        new_comment.api_id = api_id
+        new_comment.film = movie_name
         new_comment.save()
-        return redirect('profile', api_id=api_id)
+        return redirect('movie_details', movie_name=movie_name)
 
 
 def edit_profile(request, profile_id):
@@ -107,5 +110,11 @@ def delete_profile(request, profile_id):
   profile.delete()
   return redirect('index')
 
-  
+def movie_details(request, movie_name):
+    comment_form = CommentForm()
+    movie = Movie()
+    found_movie = movie.search(movie_name)[0]
+    comments = Comment.objects.filter(film=movie_name)
+    print(found_movie)
+    return render(request, 'movie/details.html', {'movie': found_movie, 'comment_form': comment_form, 'comments': comments})
 
