@@ -126,3 +126,8 @@ def movie_details(request, movie_name):
     'similar': similar}
     return render(request, 'movie/details.html', context)
 
+def movie_popular(request):
+    movie = Movie()
+    popular = movie.popular()
+    print(popular)
+    return render(request, 'movie/index.html', {'popular': popular})

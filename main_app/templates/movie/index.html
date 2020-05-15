@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for p in popular %}
+<h4> <a href="/movie/{{p.title}}">{{p.title}} </a></h4>
+<p> {{ p.overview }} </p>
+
+
+{% endfor %}
+{% endblock  %}
