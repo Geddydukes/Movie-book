@@ -1,13 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h3>{{movie.title}}</h3>
+<h2>{{movie.title}}</h2>
 <p>Released on: {{ movie.release_date }}</p>
 <br>
+<img src="https://image.tmdb.org/t/p/w500/{{ poster_path }}"/>
 <p>This movie is for adults? {{ movie.adult }}</p>
 <p>Average rating {{ movie.vote_average }}</p>
 <p>{{ movie.overview }}</p>
-
+<hr />
+<h3>Similar Movies</h3>
+{% for res in similar %}
+{% comment %} <p>{{res.title}}</p> {% endcomment %}
+<a href="/movie/{{res.title}}"> <p>{{res.title}}</p> </a>
+<small>{{ res.overview }}</small>
+{% endfor %}
+<hr />
 
 <h5>New Comment</h5>
 <form
