@@ -4,11 +4,11 @@ nav{
    
 }
 
-.movie{
-   display: flex; 
-   justify-content: space-evenly;
+nav ul {
+  float: right;
+  margin-right: 20px;
+  margin-top: 10px;
 }
-
 .profile-info{
     
     border: 2px solid #919194;
@@ -18,11 +18,17 @@ nav{
     
 }
 
-.profile-name{
-    display: flex;
-    flex-direction: column;
+nav ul li{
+  display: inline-block;
+  line-height: 60px;
+
+  /* margin: 0 30px; */
 }
 
 .profile button{
     justify-content: center;
+}
+ a:hover{
+  background: #1b9bff;
+  transition: .5s;
 }

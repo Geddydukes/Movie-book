@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
+from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from .models import Photo, Movie, Profile, Comment
 import uuid
 import boto3
+from .forms import CommentForm, ProfileForm
+
+
+
 
 
 
@@ -14,9 +19,26 @@ BUCKET = 'movie-book-profiles'
 def home(request):
     return render(request, 'home.html')
 
+
 def profile(request, profile_id):
     profile = Profile.objects.get(id=profile_id)
     return render(request , 'profile/index.html', {'profile': profile})
+
+def new_profile(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            return redirect('profile', profile.id)
+    else: 
+        form = ProfileForm()
+        context = {'form': form}
+        return render(request, 'profile/new.html', context)
+
+
+
 
 
 def signup(request):
@@ -34,6 +56,10 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 
+
+
+
+# logic for uploading photos to AWS S3
 def add_photo(request, profile_id):
     photo_file = request.FILES.get('photo-file', None)
     print(photo_file)
@@ -52,3 +78,17 @@ def add_photo(request, profile_id):
             print('An error occured uploading file to S3')
     return redirect('profile', profile_id=profile_id)
 
+
+
+
+def add_comment_to_movie(request, api_id):
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        new_comment = form.save(commit=False)
+        new_comment.api_id = api_id
+        new_comment.save()
+        return redirect('profile', api_id=api_id)
+
+
+def edit_profile(request, profile_id):
+    pass
