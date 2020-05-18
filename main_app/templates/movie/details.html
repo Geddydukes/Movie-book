@@ -1,42 +1,42 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2>{{movie.title}}</h2>
-<p>Released on: {{ movie.release_date }}</p>
-<br>
-<img src="https://image.tmdb.org/t/p/w500/{{ poster_path }}"/>
-<p>This movie is for adults? {{ movie.adult }}</p>
-<p>Average rating {{ movie.vote_average }}</p>
-<p>{{ movie.overview }}</p>
-<hr />
-<h3>Similar Movies</h3>
-{% for res in similar %}
-{% comment %} <p>{{res.title}}</p> {% endcomment %}
-<a href="/movie/{{res.title}}"> <p>{{res.title}}</p> </a>
-<small>{{ res.overview }}</small>
-{% endfor %}
-<hr />
-
-<h5>New Comment</h5>
-<form
-  action="{% url 'add_comment_to_movie' movie.title%}"
-  method="POST"
-  class="post-form"
->
-  {% csrf_token %} {{ comment_form.as_p }}
-
-  <button type="submit" class="save btn btn-default">Send</button>
-</form>
-{% if comments %}
-{% for comment in comments %}
-<div class="comment">
-  <div class="date">{{ comment.created_date }}</div>
-  <strong>{{ comment.author }}</strong>
-  <p>{{ comment.text|linebreaks }}</p>
+  <h2>{{movie.title}}</h2>
+  <p>Released on: {{ movie.release_date }}</p>
+  <br>
+  <img src="https://image.tmdb.org/t/p/w500/{{ poster_path }}"/>
+  <p>This movie is for adults? {{ movie.adult }}</p>
+  <p>Average rating {{ movie.vote_average }}</p>
+  <p>{{ movie.overview }}</p>
   <hr />
-</div>
-{% empty %}
-<p>No comments here yet :(</p>
+  <h3>Similar Movies</h3>
+  {% for res in similar %}
+  {% comment %} <p>{{res.title}}</p> {% endcomment %}
+  <a href="/movie/{{res.title}}"> <p>{{res.title}}</p> </a>
+  <small>{{ res.overview }}</small>
+  {% endfor %}
+  <hr />
+
+  <h5>New Comment</h5>
+  <form
+    action="{% url 'add_comment_to_movie' movie.title%}"
+    method="POST"
+    class="post-form"
+  >
+    {% csrf_token %} {{ comment_form.as_p }}
+
+    <button type="submit" class="save btn btn-default">Send</button>
+  </form>
+  {% if comments %}
+  {% for comment in comments %}
+  <div class="comment">
+    <div class="date">{{ comment.created_date }}</div>
+    <strong>{{ comment.author }}</strong>
+    <p>{{ comment.text|linebreaks }}</p>
+    <hr />
+  </div>
+  {% empty %}
+  <p>No comments here yet :(</p>
 {% endfor %}
 {% endif %}
 {% endblock  %}
