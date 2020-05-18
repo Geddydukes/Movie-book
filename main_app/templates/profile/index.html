@@ -6,47 +6,40 @@
 {% endblock %}
 
 {% block content %}
-    <div>
-        <img src = 'https://picsum.photos/200'>
-
-        {% for photo in profile.photo_set.all %}
-        <img class="responsive-img card-panel" src="{{photo.url}}">
-        {% empty %}
-        <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-        {% endfor %}
-        <form action="{% url 'add_photo' profile.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
-            {% csrf_token %}
-            <input type="file" name="photo-file">
-            <br><br>
-            <input type="submit" class="btn" value="Upload Photo">
-        </form>
-        <h3>fullname:</h3><span>{{ user.get_full_name }}</span>
-        <h3>Username:</h3><span>{{ user.username }}</span>
-        <div>
-            <a href="{% url 'edit_profile' profile.id %}" class="btn btn-warning">Edit profile</a>
-        </div>
-        <div>
-          <a href="{% url 'delete_profile' profile.id %}" class="btn btn-danger">Delete profile</a>
-        </div>
-         <h3>Favorite movies:</h3>
   
-        <div class = 'movie'>
-            {% comment %} add a loop to loop thruough thir favorite movies {% endcomment %}
-            <div class="card" style="width: 18rem;">
-                <img src="https://picsum.photos/200" class="card-img-top" alt="movie title">
-                <div class="card-body">
-                    <h5 class="card-title">movie title</h5>
-                    <p class="card-text">your review and rating</p>
-                    <a href="#" class="btn btn-primary">see more detals</a>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <img src="https://picsum.photos/200" class="card-img-top" alt="movie title">
-                <div class="card-body">
-                    <h5 class="card-title">movie title</h5>
-                    <p class="card-text">your review and rating</p>
-                    <a href="#" class="btn btn-primary">see more detals</a>
-                </div>
+<div class="container">
+  <img src = 'https://picsum.photos/200'>
+  <h3>Username:</h3><span>Profile name</span>
+  {% for photo in profile.photo_set.all %}
+    <img class="responsive-img card-panel" src="{{photo.url}}">
+    {% empty %}
+    <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+  {% endfor %}
+  <form action="{% url 'add_photo' profile.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+    {% csrf_token %}
+    <input type="file" name="photo-file">
+    <br><br>
+    <input type="submit" class="btn" value="Upload Photo">
+  </form>
+  <h3>fullname:</h3><span>Profile full name</span>
+  <h3>Username:</h3><span>Profile email</span>
+  <h3>Favorite movies:</h3>
+      
+  <a href="{% url 'edit_profile' profile.id %}" class="btn btn-warning">Edit profile</a>
+  <a href="{% url 'delete_profile' profile.id %}" class="btn btn-danger">Delete profile</a>
+  {% comment %} add a loop to loop thruough thir favorite movies {% endcomment %}
+  <!-- <div class="card" id="backdrop"> -->
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="text-center">
+                <img src="https://picsum.photos/200" alt="" class="img-fluid">
+                  <h2 class="text-center"> Movie Title </h2>
+                    <p>your review and rating</p>
+                      <a href="#">Read More</a>
+              </div>
             </div>
           </div>
         </div>
