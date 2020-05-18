@@ -2,7 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
-from .models import Photo, Film, Profile, Comment
+from django.contrib.auth.decorators import login_required
+from .models import Photo, Film, Profile, Comment 
+from django.contrib.auth.models import User
+
+
 import uuid
 import boto3
 from .forms import CommentForm, ProfileForm , UserForm
@@ -27,18 +31,6 @@ def profile(request, profile_id):
     profile = Profile.objects.get(id=profile_id)
     return render(request , 'profile/index.html', {'profile': profile})
 
-def new_profile(request):
-    if request.method == 'POST':
-        form = ProfileForm(request.POST)
-        if form.is_valid():
-            profile = form.save(commit=False)
-            profile.user = request.user
-            profile.save()
-            return redirect('profile', profile.id)
-    else: 
-        form = ProfileForm()
-        context = {'form': form}
-        return render(request, 'profile/new.html', context)
 
 
 
@@ -114,11 +106,17 @@ def edit_profile(request, profile_id):
     })
 
 def delete_profile(request, profile_id):
-  profile = Profile.objects.get(id=profile_id)
-  profile.delete()
-  return redirect('home')
+    # u = User.objects.get(username = username)
+    profile = Profile.objects.get(id=profile_id)
+    user = User.objects.get(id = profile.user_id)
+    user.delete()
+    profile.delete()
+    return redirect('home')
 
   
+
+def movie_show(request):
+    pass 
 
 def movie_details(request, movie_name):
     comment_form = CommentForm()
@@ -136,3 +134,7 @@ def movie_details(request, movie_name):
     'similar': similar}
     return render(request, 'movie/details.html', context)
 
+
+@login_required
+def account_redirect(request):
+    return redirect('account-landing', pk=request.user.pk, name=request.user.username)

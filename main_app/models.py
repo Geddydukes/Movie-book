@@ -12,7 +12,6 @@ class Film(models.Model):
     def __str__(self):
         return self.name
 
-
 class Profile(models.Model):
     display_name = models.CharField(max_length=50)
     films_list = models.ManyToManyField(Film)
