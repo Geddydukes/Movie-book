@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Photo, Film, Profile, Comment
 import uuid
 import boto3
-from .forms import CommentForm, ProfileForm
+from .forms import CommentForm, ProfileForm , UserForm
 
 from tmdbv3api import TMDb, Movie
 tmdb = TMDb()
@@ -94,16 +94,24 @@ def add_comment_to_movie(request, movie_name):
 
 
 def edit_profile(request, profile_id):
-  profile = Profile.objects.get(id=profile_id)
+  
   if request.method == 'POST':
-    form = ProfileForm(request.POST, instance=profile)
-    if form.is_valid():
-      profile = form.save()
-      return redirect('profile', profile_id=profile_id)
-  else:
-    form = ProfileForm(instance=profile)
-    return render(request, 'profile/edit.html', {'form': form, 'profile': profile})
+    user_form = UserForm(request.POST, instance=request.user)
+    profile_form = ProfileForm(request.POST, instance=request.user.profile)
+    if user_form .is_valid() and profile_form.is_valid:
+        user_form.save()
+        profile_form.save()
 
+        return redirect('profile', profile_id=profile_id)
+   
+  else:
+    user_form = UserForm(instance=request.user)
+    profile_form = ProfileForm(instance=request.user.profile)
+    return render(request, 'profile/edit.html', 
+    { 
+    'user_form': user_form,
+    'profile_form': profile_form,
+    })
 
 def delete_profile(request, profile_id):
   profile = Profile.objects.get(id=profile_id)
