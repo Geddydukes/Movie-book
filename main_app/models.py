@@ -8,7 +8,9 @@ from django.dispatch import receiver
 # Create your models here.
 
 class Film(models.Model):
-    name = models.CharField(max_length=150)
+    title = models.CharField(max_length=150)
+
+    
     def __str__(self):
         return self.name
 

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Comment, Profile, User
+from .models import Comment, Profile, User , Film
 
 
 
@@ -19,3 +19,8 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('first_name', 'last_name', 'email')
 
+
+class FilmForm(forms.ModelForm):
+    class Meta:
+        model = Film
+        fields =('title',)

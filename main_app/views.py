@@ -116,7 +116,16 @@ def delete_profile(request, profile_id):
   
 
 def movie_show(request):
-    pass 
+    movie = Movie()
+    
+    populars = movie.popular()
+    print(populars)
+
+    context ={
+        'movie': populars,
+    
+    }
+    return render(request , 'movie/index.html' , context)
 
 def movie_details(request, movie_name):
     comment_form = CommentForm()
