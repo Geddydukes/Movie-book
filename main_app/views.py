@@ -110,7 +110,7 @@ def edit_profile(request, profile_id):
 def delete_profile(request, profile_id):
   profile = Profile.objects.get(id=profile_id)
   profile.delete()
-  return redirect('index')
+  return redirect('home')
 
   
 

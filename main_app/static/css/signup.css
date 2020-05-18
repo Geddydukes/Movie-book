@@ -12,3 +12,6 @@ body{
     background-color: #808080;  
     color: white;
 }
+.form-control {
+  width: 60%;
+}
