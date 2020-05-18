@@ -1,13 +1,18 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
 
-<section class="form-section">
-  <h1>Edit Profile</h1>
-  <form  method="POST" >
-    {% csrf_token %}
-    {{form.as_p}}
-    <button class="btn" type="submit">Save</button>
-  </form>
-</section>
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h3 class="text-center"> Edit Profile</h3>
+      <form action="" method="POST">
+      {% csrf_token %}
+      {{ form | crispy }}
+      <input type="submit" value="Edit" class="btn btn-danger">
+    </form>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

@@ -24,10 +24,10 @@
         <h3>Username:</h3><span>Profile email</span>
          <h3>Favorite movies:</h3>
       
-            <button>Edit</button>
+         <a href="{% url 'edit_profile' profile.id %}" class="btn btn-warning">Edit profile</a>
         </div>
         <div>
-            <button>Delete</button>
+          <a href="{% url 'delete_profile' profile.id %}" class="btn btn-danger">Delete profile</a>
         </div>
         <div class = 'movie'>
             {% comment %} add a loop to loop thruough thir favorite movies {% endcomment %}

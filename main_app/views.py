@@ -101,14 +101,16 @@ def edit_profile(request, profile_id):
       profile = form.save()
       return redirect('profile', profile_id=profile_id)
   else:
-    form = ProfileForm(instance=profile_id)
+    form = ProfileForm(instance=profile)
     return render(request, 'profile/edit.html', {'form': form, 'profile': profile})
 
 
 def delete_profile(request, profile_id):
   profile = Profile.objects.get(id=profile_id)
   profile.delete()
-  return redirect('index')
+  return redirect('home')
+
+  
 
 def movie_details(request, movie_name):
     comment_form = CommentForm()
