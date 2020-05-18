@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.http import HttpResponse
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
+from .forms import RegisterForm
+
 from .models import Photo, Film, Profile, Comment
 import uuid
 import boto3
@@ -47,14 +49,14 @@ def new_profile(request):
 def signup(request):
     error_message = ''
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('/')
         else:
             error_message = 'Invalid sign up - try again'
-    form = UserCreationForm()
+    form = RegisterForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
@@ -101,7 +103,7 @@ def edit_profile(request, profile_id):
       profile = form.save()
       return redirect('profile', profile_id=profile_id)
   else:
-    form = ProfileForm(instance=profile_id)
+    form = ProfileForm(instance=profile)
     return render(request, 'profile/edit.html', {'form': form, 'profile': profile})
 
 
@@ -109,6 +111,8 @@ def delete_profile(request, profile_id):
   profile = Profile.objects.get(id=profile_id)
   profile.delete()
   return redirect('index')
+
+  
 
 def movie_details(request, movie_name):
     comment_form = CommentForm()
