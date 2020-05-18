@@ -1,22 +1,29 @@
 {% extends 'base.html' %}
-{% load static%}
+{% load crispy_forms_tags %}
+
+<!-- {% load static%}
 
 {%block style%}
   <link rel="stylesheet" href="{% static 'css/login.css' %}">
-{% endblock %}
+{% endblock %} -->
 
 {% block content %}
 
-<h1>Login</h1>
-{% if error_message %}<p class="red-text">{{ error_message }}</p>{% endif %}
+<div class="container">
+  <br>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="text-center"> Login</h3>
+      {% if error_message %}<p class="red-text">{{ error_message }}</p>{% endif %}
+       <form action="{% url 'login' %}" method="POST">
+      {% csrf_token %}
+      {{ form | crispy }}
+      <input type="submit" value="login" class="btn btn-danger">
+      <input type="hidden" name="next" value="{{ next }}">
 
-
-<!-- login form -->
-<form method="post" action="{% url 'login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" class="btn" value="login">
-  <input type="hidden" name="next" value="{{ next }}">
-</form>
+    </form>
+    </div>
+  </div>
+</div>
 
 {% endblock  %}
