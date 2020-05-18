@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Photo, Film, Profile, Comment
 import uuid
 import boto3
-from .forms import CommentForm, ProfileForm
+from .forms import CommentForm, ProfileForm , UserForm
 
 from tmdbv3api import TMDb, Movie
 tmdb = TMDb()
@@ -94,16 +94,24 @@ def add_comment_to_movie(request, movie_name):
 
 
 def edit_profile(request, profile_id):
-  profile = Profile.objects.get(id=profile_id)
+  
   if request.method == 'POST':
-    form = ProfileForm(request.POST, instance=profile)
-    if form.is_valid():
-      profile = form.save()
-      return redirect('profile', profile_id=profile_id)
-  else:
-    form = ProfileForm(instance=profile)
-    return render(request, 'profile/edit.html', {'form': form, 'profile': profile})
+    user_form = UserForm(request.POST, instance=request.user)
+    profile_form = ProfileForm(request.POST, instance=request.user.profile)
+    if user_form .is_valid() and profile_form.is_valid:
+        user_form.save()
+        profile_form.save()
 
+        return redirect('profile', profile_id=profile_id)
+   
+  else:
+    user_form = UserForm(instance=request.user)
+    profile_form = ProfileForm(instance=request.user.profile)
+    return render(request, 'profile/edit.html', 
+    { 
+    'user_form': user_form,
+    'profile_form': profile_form,
+    })
 
 def delete_profile(request, profile_id):
   profile = Profile.objects.get(id=profile_id)
@@ -116,7 +124,15 @@ def movie_details(request, movie_name):
     comment_form = CommentForm()
     movie = Movie()
     found_movie = movie.search(movie_name)[0]
+    poster_path = found_movie.poster_path[1:]
+    similar = movie.similar(found_movie.id)
+    print(found_movie.id)
     comments = Comment.objects.filter(film=movie_name)
     print(found_movie)
-    return render(request, 'movie/details.html', {'movie': found_movie, 'comment_form': comment_form, 'comments': comments})
+    context = {'movie': found_movie, 
+    'comment_form': comment_form, 
+    'comments': comments, 
+    'poster_path': poster_path,
+    'similar': similar}
+    return render(request, 'movie/details.html', context)
 
