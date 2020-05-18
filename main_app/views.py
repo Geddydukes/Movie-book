@@ -1,9 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.http import HttpResponse
-# from django.contrib.auth.forms import UserCreationForm
-from .forms import RegisterForm
-
+from django.contrib.auth.forms import UserCreationForm
 from .models import Photo, Film, Profile, Comment
 import uuid
 import boto3
@@ -49,14 +47,14 @@ def new_profile(request):
 def signup(request):
     error_message = ''
     if request.method == 'POST':
-        form = RegisterForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('/')
         else:
             error_message = 'Invalid sign up - try again'
-    form = RegisterForm()
+    form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
