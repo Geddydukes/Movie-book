@@ -27,15 +27,15 @@
       </div>
       <div class="col-md-8">
         <h5>Display name: {{ user.profile.display_name }} </h5>
-        <h5>Fullname: {{user.first_name}} ,{{ user.last_name }}</h5>
-        <h5>email: {{ profile.email }}</h5>
+        <h5>Fullname: {{user.profile.first_name}} ,{{ user.profile.last_name }}</h5>
+        <h5>email: {{ user.profile.email }}</h5>
         <a href="{% url 'edit_profile' profile.id %}" class="btn btn-warning">Edit profile</a>
         <a href="{% url 'delete_profile' profile.id %}" class="btn btn-danger">Delete profile</a>
 
       </div>
     </div>
-   </div>
   </div>
+</div>
   {% comment %} add a loop to loop thruough thir favorite movies {% endcomment %}
   <!-- <div class="card" id="backdrop"> -->
 
@@ -44,20 +44,19 @@
       <div class="row">
         <div class="col-md-4">
           <div class="card">
-              <img src="https://image.tmdb.org/t/p/w500/{{ film.poster_path }}" style='max-width:100%' class='card-img-top'/>
-              <div class="card-body">
-                <div class="text-center">
-                  <h2 class="text-center"> {{ film.title }} </h2>
-                    <p>your review and rating</p>
-                      <a href="/movies/{{film.title}}">Read More</a>
-                
+            <img src="https://image.tmdb.org/t/p/w500/{{ film.poster_path }}" style='max-width:100%' class='card-img-top'/>
+            <div class="card-body">
+              <div class="text-center">
+                <h2 class="text-center"> {{ film.title }} </h2>
+                <p>your review and rating</p>
+                <a href="/movie/{{film.title}}">Read More</a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>    
-{% endfor %} 
+  {% endfor %} 
 
 
 {% endblock  %}

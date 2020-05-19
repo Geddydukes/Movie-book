@@ -7,9 +7,3 @@ body {
   background-size: cover;
   /* color: white; */
 }
-
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-}
