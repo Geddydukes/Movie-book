@@ -168,7 +168,11 @@ def profile_new(request):
 
 
 def add_movie(request, movie_name):
-    new_film = Film(title=movie_name)
+    movie = Movie()
+    found_movie = movie.search(movie_name)[0]
+    poster_path = found_movie.poster_path[1:]
+    print(poster_path)
+    new_film = Film(title=movie_name, poster_path=poster_path)
     new_film.save()
     Profile.objects.get(user=request.user).films_list.add(new_film)
     return redirect('/')

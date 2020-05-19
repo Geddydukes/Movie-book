@@ -14,7 +14,7 @@
     <div class="row">
       <div class="col-md-4">
         {% for photo in profile.photo_set.all %}
-            <img class="responsive-img card-panel" src="{{photo.url}}">
+            <img class="responsive-img card-panel" src="{{photo.url}}" style='max-width:100%'>
         {% empty %}
             <div class="card-panel teal-text center-align">No Photos Uploaded</div>
         {% endfor %}
@@ -38,21 +38,26 @@
   </div>
   {% comment %} add a loop to loop thruough thir favorite movies {% endcomment %}
   <!-- <div class="card" id="backdrop"> -->
-  {% for film in profile.films_list.all %}
-    <div class="card-body">
-      <div class="row">
-        <div class="col-md-4">
+  
+{% for film in profile.films_list.all %}
+    <div class="cards">
+      <div class="row row-cols-3">
+        <div class="col mb-4">
           <div class="card">
-            <div class="card-body">
-              <div class="text-center">
-                <img src="https://picsum.photos/200" alt="" class="img-fluid">
+              <img src="https://image.tmdb.org/t/p/w500/{{ film.poster_path }}" style='max-width:100%' class='card-img-top'/>
+              <div class="card-body">
+                <div class="text-center">
                   <h2 class="text-center"> {{ film.title }} </h2>
                     <p>your review and rating</p>
-                      <a href="movies/{{film.title}}">Read More</a>
+                      <a href="/movies/{{film.title}}">Read More</a>
+                
               </div>
             </div>
           </div>
         </div>
-{% endfor %}
-  
+      </div>
+    </div>    
+{% endfor %} 
+
+
 {% endblock  %}
