@@ -52,6 +52,12 @@
                 <a href="/movie/{{film.title}}">Read More</a>
               </div>
             </div>
+            <div class="card-action">
+              <form action="{% url 'remove_movie' film.id profile.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn">Remove</button>
+              </form>
+            </div>
           </div>
         </div>
       </div>

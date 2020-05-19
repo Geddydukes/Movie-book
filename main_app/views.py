@@ -176,6 +176,12 @@ def add_movie(request, movie_name):
     Profile.objects.get(user=request.user).films_list.add(new_film)
     return redirect('/')
 
+def remove_movie(request, film_id, profile_id):
+    Profile.objects.get(user=request.user).films_list.remove(film_id)
+    return render(request , 'profile/index.html', {'profile': profile})
+
+
+
 
 
 def tv_show(request):
