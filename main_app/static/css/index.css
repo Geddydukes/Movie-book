@@ -5,12 +5,5 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  display: flex;
   /* color: white; */
-}
-
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
 }
