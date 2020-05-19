@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
-
 {% block style%}
    <link rel="stylesheet" href="{% static 'css/movie_index.css' %}">
 
@@ -10,22 +8,29 @@
 
 {% block content%}
 
-
-    <div class = 'cards'>
-    {% for popular in movie %}
-
-        <div class="card" style="width: 18rem;">
-            <img src="https://image.tmdb.org/t/p/w500/{{ popular.poster_path }}" class="card-img-top" alt="...">
+<div class="container">
+  <br>
+  <!-- <div class="card" id="backdrop" > -->
+    <div class="card-body">
+      <div class="row" >
+        {% for popular in movie %}
+        <div class="col-md-6">
+          <div class="card"  style="width: 100%; height: 100%;">
             <div class="card-body">
-                <h5 class="card-title">{{popular.title}}</h5>
-                <p class="card-text">{{popular.overview}}</p>
-                <a href="/movie/{{popular.title}}" class="btn btn-primary">see more detail</a>
+              <div class="text-center">
+              <img src="https://image.tmdb.org/t/p/w500/{{ popular.poster_path }}" alt="" class="img-fluid" width="80%" height="300px">
+              <h3 class="text-center">{{popular.title}}</h3>
+              <p class="card-text">{{popular.overview}}</p>
+              </div>
             </div>
-        </div>
- 
-
-    {%endfor%}
+            <a href="/movie/{{popular.title}}" class="btn btn-primary">Read More</a>
+          </div>
+           </div>
+        {% endfor %} 
+      </div>
     </div>
-
+  </div>
+</div>
 
 {% endblock %}
+
