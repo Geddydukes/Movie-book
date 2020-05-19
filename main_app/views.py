@@ -32,7 +32,8 @@ def profile(request, profile_id):
     return render(request , 'profile/index.html', {'profile': profile})
 
 
-
+def about_us(request):
+    return render(request, 'about.html')
 
 
 

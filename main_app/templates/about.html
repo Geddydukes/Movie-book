@@ -1,13 +1,39 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block styles%}
-   <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+{% block style%}
+   <link rel="stylesheet" href="{% static 'css/index.css' %}">
 
 {% endblock %}
 
 {% block content%}
-<div class = 'welcome'>  
-    <h2>Welcome To Movie Books </h2>
-       <p> A social media site for movie lovers
+<div class = 'welcome' style='color:white'>  
+    <h2>The Team behind Movie Books </h2>
+       <p> A social media site for movie lovers powered by TMDb </p>
 </div>
+
+<div class="card-deck">
+  <div class="card">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Freshta Bashari</h5>
+      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+    </div>
+  </div>
+  <div class="card">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Alvin Wong</h5>
+      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+    </div>
+  </div>
+  <div class="card">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Geddy Dukes</h5>
+      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
