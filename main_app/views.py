@@ -86,7 +86,9 @@ def add_comment_to_movie(request, movie_name):
 
 
 def edit_profile(request, profile_id):
-  
+  profile = Profile.objects.get(id=profile_id)
+  user = User.objects.get(id = profile.user_id)
+
   if request.method == 'POST':
     user_form = UserForm(request.POST, instance=request.user)
     profile_form = ProfileForm(request.POST, instance=request.user.profile)
@@ -106,7 +108,6 @@ def edit_profile(request, profile_id):
     })
 
 def delete_profile(request, profile_id):
-    # u = User.objects.get(username = username)
     profile = Profile.objects.get(id=profile_id)
     user = User.objects.get(id = profile.user_id)
     user.delete()
