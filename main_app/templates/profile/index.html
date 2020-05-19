@@ -38,12 +38,12 @@
   </div>
   {% comment %} add a loop to loop thruough thir favorite movies {% endcomment %}
   <!-- <div class="card" id="backdrop"> -->
-
-  {% for film in user.profile.films_list.all %}
+  
     <div class="card-body">
       <div class="row">
+        {% for film in user.profile.films_list.all %}
         <div class="col-md-4">
-          <div class="card">
+          <div class="card mb-4" >
               <img src="https://image.tmdb.org/t/p/w500/{{ film.poster_path }}" style='max-width:100%' class='card-img-top'/>
               <div class="card-body">
                 <div class="text-center">
@@ -55,9 +55,10 @@
             </div>
           </div>
         </div>
+        {% endfor %} 
       </div>
     </div>    
-{% endfor %} 
+</div>
 
 
 {% endblock  %}
