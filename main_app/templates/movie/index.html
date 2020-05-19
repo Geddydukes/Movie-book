@@ -1,10 +1,31 @@
 {% extends 'base.html' %}
-{% block content %}
-
-{% for p in popular %}
-<h4> <a href="/movie/{{p.title}}">{{p.title}} </a></h4>
-<p> {{ p.overview }} </p>
+{% load static %}
 
 
-{% endfor %}
-{% endblock  %}
+
+{% block style%}
+   <link rel="stylesheet" href="{% static 'css/movie_index.css' %}">
+
+{% endblock %}
+
+{% block content%}
+
+
+    <div class = 'cards'>
+    {% for popular in movie %}
+
+        <div class="card" style="width: 18rem;">
+            <img src="https://image.tmdb.org/t/p/w500/{{ popular.poster_path }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{popular.title}}</h5>
+                <p class="card-text">{{popular.overview}}</p>
+                <a href="/movie/{{popular.title}}" class="btn btn-primary">see more detail</a>
+            </div>
+        </div>
+ 
+
+    {%endfor%}
+    </div>
+
+
+{% endblock %}

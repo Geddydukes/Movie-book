@@ -2,10 +2,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
-from .models import Photo, Film, Profile, Comment
+from django.contrib.auth.decorators import login_required
+from .models import Photo, Film, Profile, Comment 
+from django.contrib.auth.models import User
+
+
 import uuid
 import boto3
-from .forms import CommentForm, ProfileForm
+from .forms import CommentForm, ProfileForm , UserForm
 
 from tmdbv3api import TMDb, Movie
 tmdb = TMDb()
@@ -27,18 +31,6 @@ def profile(request, profile_id):
     profile = Profile.objects.get(id=profile_id)
     return render(request , 'profile/index.html', {'profile': profile})
 
-def new_profile(request):
-    if request.method == 'POST':
-        form = ProfileForm(request.POST)
-        if form.is_valid():
-            profile = form.save(commit=False)
-            profile.user = request.user
-            profile.save()
-            return redirect('profile', profile.id)
-    else: 
-        form = ProfileForm()
-        context = {'form': form}
-        return render(request, 'profile/new.html', context)
 
 
 
@@ -94,21 +86,46 @@ def add_comment_to_movie(request, movie_name):
 
 
 def edit_profile(request, profile_id):
-  profile = Profile.objects.get(id=profile_id)
+  
   if request.method == 'POST':
-    form = ProfileForm(request.POST, instance=profile)
-    if form.is_valid():
-      profile = form.save()
-      return redirect('profile', profile_id=profile_id)
-  else:
-    form = ProfileForm(instance=profile_id)
-    return render(request, 'profile/edit.html', {'form': form, 'profile': profile})
+    user_form = UserForm(request.POST, instance=request.user)
+    profile_form = ProfileForm(request.POST, instance=request.user.profile)
+    if user_form .is_valid() and profile_form.is_valid:
+        user_form.save()
+        profile_form.save()
 
+        return redirect('profile', profile_id=profile_id)
+   
+  else:
+    user_form = UserForm(instance=request.user)
+    profile_form = ProfileForm(instance=request.user.profile)
+    return render(request, 'profile/edit.html', 
+    { 
+    'user_form': user_form,
+    'profile_form': profile_form,
+    })
 
 def delete_profile(request, profile_id):
-  profile = Profile.objects.get(id=profile_id)
-  profile.delete()
-  return redirect('index')
+    # u = User.objects.get(username = username)
+    profile = Profile.objects.get(id=profile_id)
+    user = User.objects.get(id = profile.user_id)
+    user.delete()
+    profile.delete()
+    return redirect('home')
+
+  
+
+def movie_show(request):
+    movie = Movie()
+    
+    populars = movie.popular()
+    print(populars)
+
+    context ={
+        'movie': populars,
+    
+    }
+    return render(request , 'movie/index.html' , context)
 
 def movie_details(request, movie_name):
     comment_form = CommentForm()
@@ -125,6 +142,12 @@ def movie_details(request, movie_name):
     'poster_path': poster_path,
     'similar': similar}
     return render(request, 'movie/details.html', context)
+
+
+@login_required
+def account_redirect(request):
+    return redirect('account-landing', pk=request.user.pk, name=request.user.username)
+
 
 def movie_popular(request):
     movie = Movie()

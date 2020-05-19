@@ -9,18 +9,25 @@
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/movies/popular">Popular</a>
+        <a class="nav-link" href="/movie/index">Movies</a>
+      </li>
+
+        {% if user.is_authenticated %}
+      <li class="nav-item">
+          <a class="nav-link" href="{% url 'profile' user.profile.id%} ">Profile</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
+        <a class="nav-link" href="{% url 'logout' %}">logout</a>
       </li>
+        {% else %}
       <li class="nav-item">
-        <a class="nav-link" href="#">Login</a>
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
       </li>
    
       <li class="nav-item">
         <a class="nav-link" href="/accounts/signup">Signup</a>
       </li>
+        {% endif %}
     </ul>
   </div>
 </nav>
