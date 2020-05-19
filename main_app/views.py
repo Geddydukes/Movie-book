@@ -28,7 +28,8 @@ def home(request):
 
 
 def profile(request, profile_id):
-    profile = Profile.objects.get(id=profile_id)
+    profile = User.objects.get(id=profile_id)
+
     return render(request , 'profile/index.html', {'profile': profile})
 
 
@@ -43,7 +44,8 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('/')
+            
+            return redirect(f'/accounts/profile/{user.id}/edit')
         else:
             error_message = 'Invalid sign up - try again'
     form = UserCreationForm()
@@ -148,3 +150,28 @@ def movie_details(request, movie_name):
 @login_required
 def account_redirect(request):
     return redirect('account-landing', pk=request.user.pk, name=request.user.username)
+
+
+
+def profile_new(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            return redirect('/')
+        else:
+            error_message = 'Invalid sign up - try again'
+    form = ProfileForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'profile/new.html', context)
+
+
+
+
+def add_movie(request, movie_name):
+    new_film = Film(title=movie_name)
+    new_film.save()
+    Profile.objects.get(user=request.user).films_list.add(new_film)
+    return redirect('/')
