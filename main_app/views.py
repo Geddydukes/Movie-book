@@ -43,7 +43,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('/')
+            return redirect('profile_new')
         else:
             error_message = 'Invalid sign up - try again'
     form = UserCreationForm()
@@ -149,8 +149,17 @@ def account_redirect(request):
     return redirect('account-landing', pk=request.user.pk, name=request.user.username)
 
 
-def movie_popular(request):
-    movie = Movie()
-    popular = movie.popular()
-    print(popular)
-    return render(request, 'movie/index.html', {'popular': popular})
+
+def profile_new(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            return redirect('/')
+        else:
+            error_message = 'Invalid sign up - try again'
+    form = ProfileForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'profile/new.html', context)
