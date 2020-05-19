@@ -163,3 +163,12 @@ def profile_new(request):
     form = ProfileForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'profile/new.html', context)
+
+
+
+
+def add_movie(request, movie_name):
+    new_film = Film(title=movie_name)
+    new_film.save()
+    Profile.objects.get(user=request.user).films_list.add(new_film)
+    return redirect('/')

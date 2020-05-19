@@ -38,6 +38,7 @@
   </div>
   {% comment %} add a loop to loop thruough thir favorite movies {% endcomment %}
   <!-- <div class="card" id="backdrop"> -->
+  {% for film in profile.films_list.all %}
     <div class="card-body">
       <div class="row">
         <div class="col-md-4">
@@ -45,39 +46,13 @@
             <div class="card-body">
               <div class="text-center">
                 <img src="https://picsum.photos/200" alt="" class="img-fluid">
-                  <h2 class="text-center"> Movie Title </h2>
+                  <h2 class="text-center"> {{ film.title }} </h2>
                     <p>your review and rating</p>
-                      <a href="#">Read More</a>
+                      <a href="movies/{{film.title}}">Read More</a>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body">
-              <div class="text-center">
-                <img src="https://picsum.photos/200" alt="" class="img-fluid">
-                  <h2 class="text-center"> Movie Title </h2>
-                    <p>your review and rating</p>
-                      <a href="#">Read More</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body">
-              <div class="text-center">
-                <img src="https://picsum.photos/200" alt="" class="img-fluid">
-                  <h2 class="text-center"> Movie Title </h2>
-                    <p>your review and rating</p>
-                      <a href="#">Read More</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
+{% endfor %}
   
 {% endblock  %}
