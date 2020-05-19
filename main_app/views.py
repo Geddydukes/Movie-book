@@ -88,7 +88,9 @@ def add_comment_to_movie(request, movie_name):
 
 
 def edit_profile(request, profile_id):
-  
+  profile = Profile.objects.get(id=profile_id)
+  user = User.objects.get(id = profile.user_id)
+
   if request.method == 'POST':
     user_form = UserForm(request.POST, instance=request.user)
     profile_form = ProfileForm(request.POST, instance=request.user.profile)
@@ -108,7 +110,6 @@ def edit_profile(request, profile_id):
     })
 
 def delete_profile(request, profile_id):
-    # u = User.objects.get(username = username)
     profile = Profile.objects.get(id=profile_id)
     user = User.objects.get(id = profile.user_id)
     user.delete()
@@ -170,7 +171,11 @@ def profile_new(request):
 
 
 def add_movie(request, movie_name):
-    new_film = Film(title=movie_name)
+    movie = Movie()
+    found_movie = movie.search(movie_name)[0]
+    poster_path = found_movie.poster_path[1:]
+    print(poster_path)
+    new_film = Film(title=movie_name, poster_path=poster_path)
     new_film.save()
     Profile.objects.get(user=request.user).films_list.add(new_film)
     return redirect('/')
