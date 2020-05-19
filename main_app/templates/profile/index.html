@@ -26,8 +26,8 @@
         </form>
       </div>
       <div class="col-md-8">
-        <h5>username: {{ profile.display_name }} </h5>
-        <h5>lastname: {{ profile.last_name }}</h5>
+        <h5>Display name: {{ user.profile.display_name }} </h5>
+        <h5>Fullname: {{user.first_name}} ,{{ user.last_name }}</h5>
         <h5>email: {{ profile.email }}</h5>
         <a href="{% url 'edit_profile' profile.id %}" class="btn btn-warning">Edit profile</a>
         <a href="{% url 'delete_profile' profile.id %}" class="btn btn-danger">Delete profile</a>
@@ -38,7 +38,7 @@
   </div>
   {% comment %} add a loop to loop thruough thir favorite movies {% endcomment %}
   <!-- <div class="card" id="backdrop"> -->
-  {% for film in profile.films_list.all %}
+  {% for film in user.profile.films_list.all %}
     <div class="card-body">
       <div class="row">
         <div class="col-md-4">

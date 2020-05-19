@@ -28,7 +28,8 @@ def home(request):
 
 
 def profile(request, profile_id):
-    profile = Profile.objects.get(id=profile_id)
+    profile = User.objects.get(id=profile_id)
+
     return render(request , 'profile/index.html', {'profile': profile})
 
 
@@ -43,7 +44,8 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('profile_new')
+            
+            return redirect(f'/accounts/profile/{user.id}/edit')
         else:
             error_message = 'Invalid sign up - try again'
     form = UserCreationForm()
