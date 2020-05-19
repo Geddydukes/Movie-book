@@ -46,7 +46,7 @@ def signup(request):
             user = form.save()
             login(request, user)
             
-            return redirect(f'/accounts/profile/{user.id}/edit')
+            return redirect(f'/accounts/profile/new')
         else:
             error_message = 'Invalid sign up - try again'
     form = UserCreationForm()
