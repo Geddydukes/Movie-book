@@ -28,7 +28,8 @@ def home(request):
 
 
 def profile(request, profile_id):
-    profile = Profile.objects.get(id=profile_id)
+    profile = User.objects.get(id=profile_id)
+
     return render(request , 'profile/index.html', {'profile': profile})
 
 
@@ -44,7 +45,8 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('profile_new')
+            
+            return redirect(f'/accounts/profile/{user.id}/edit')
         else:
             error_message = 'Invalid sign up - try again'
     form = UserCreationForm()
@@ -87,7 +89,9 @@ def add_comment_to_movie(request, movie_name):
 
 
 def edit_profile(request, profile_id):
-  
+  profile = Profile.objects.get(id=profile_id)
+  user = User.objects.get(id = profile.user_id)
+
   if request.method == 'POST':
     user_form = UserForm(request.POST, instance=request.user)
     profile_form = ProfileForm(request.POST, instance=request.user.profile)
@@ -107,7 +111,6 @@ def edit_profile(request, profile_id):
     })
 
 def delete_profile(request, profile_id):
-    # u = User.objects.get(username = username)
     profile = Profile.objects.get(id=profile_id)
     user = User.objects.get(id = profile.user_id)
     user.delete()
