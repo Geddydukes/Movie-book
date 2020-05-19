@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style%}
+ <link rel="stylesheet" href="{% static 'css/movie_detail.css' %}">
+{% endblock%}
+
+{% block content %}
+  <div class="jumbotron jumbotron-fluid" class='img-fluid' style = 'background-image:url("https://image.tmdb.org/t/p/w500/{{ poster_path }}")' >
+    <div class="container">
+    <h1 class="display-4">{{tv.name}}</h1>
+      <p class="lead">Released on: {{ tv.first_air_date }}</p>
+    </div>
+  </div>
+  <div>
+    {% comment %} <form action="{% url 'add_tv' tv.name %}"><button type="submit" class="btn btn-danger"> Add to Favorite</button></form> {% endcomment %}
+      {% comment %} <a href="{% url 'add_tv' tv.name %}" class="btn btn-danger">add To Favorite</a> {% endcomment %}
+  </div>
+  <br>
+ 
+<div class="card">
+  <div class="card-body">
+    <article>Average rating {{ tv.vote_average }}</article>
+    <article>{{ tv.overview }}</article>
+  </div>
+</div>
+  <hr />
+  <h3 style="color:white">Similar tvs</h3>
+  {% for res  in  similar|slice:":5"  %}
+ <div class="card">
+  <div class="card-body">
+    <a href="/tv/{{res.name}}"> <article>{{res.name}}</article> </a>
+    <small>{{ res.overview }}</small>
+  </div>
+</div>
+  {% endfor %}
+  <hr />
+
+{% endblock  %}

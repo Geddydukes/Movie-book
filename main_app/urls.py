@@ -13,5 +13,9 @@ urlpatterns = [
     path('movie/<str:movie_name>', views.movie_details, name='movie_details'),
     path('movie/<str:movie_name>/comment', views.add_comment_to_movie, name='add_comment_to_movie'),
     path('movie/<str:movie_name>/add_movie', views.add_movie, name = 'add_movie'),
+    path('about/us', views.about_us, name='about_us'),
+    path('tv/index' , views.tv_show ,name= ' tv_index'),
+    path('tv/<str:tv_name>', views.tv_details, name='tv_details'),
+    path('tv/<str:tv_name>/comment', views.add_comment_to_tv, name='add_comment_to_tv'),
 ]
 
