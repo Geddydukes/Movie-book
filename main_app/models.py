@@ -12,7 +12,7 @@ class Film(models.Model):
 
     
     def __str__(self):
-        return self.name
+        return self.title
 
 class Profile(models.Model):
     display_name = models.CharField(max_length=50)
@@ -59,4 +59,7 @@ class Photo(models.Model):
 
     def __str__(self):
         return f"Photo for profile_id: {self.profile_id} @{self.url}"
-        
+
+
+
+

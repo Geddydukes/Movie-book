@@ -16,7 +16,8 @@
       <h3 class="text-center"> Edit Profile</h3>
       <form action="" method="POST">
       {% csrf_token %}
-      {{ form | crispy }}
+      {{ user_form | crispy }}
+      {{ profile_form | crispy}}
       <input type="submit" value="Edit" class="btn btn-danger">
     </form>
     </div>
