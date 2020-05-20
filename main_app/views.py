@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 
 import uuid
 import boto3
-from .forms import CommentForm, ProfileForm , UserForm
+from .forms import CommentForm, ProfileForm , UserForm ,FilmForm
 
 from tmdbv3api import TMDb, Movie, TV
 tmdb = TMDb()
@@ -35,8 +35,6 @@ def profile(request, profile_id):
 
 def about_us(request):
     return render(request, 'about.html')
-
-
 
 def signup(request):
     error_message = ''

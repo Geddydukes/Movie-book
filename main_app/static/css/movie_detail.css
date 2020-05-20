@@ -3,7 +3,27 @@
   height: 500px;
   color: antiquewhite;
 }
+.card{
+    color: black;
+}
 
+.cards{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+<<<<<<< HEAD
+body{
+    /* Krists Luhaers for photo */
+    background: url(../images/home.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: white;
+  }
+
+=======
 body {
   background: url(../images/home.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -15,3 +35,4 @@ body {
 p {
   color: white;
 }
+>>>>>>> dev

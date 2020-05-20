@@ -24,6 +24,20 @@
     </div>
   </div>
   <hr />
+<<<<<<< HEAD
+  <h3>Similar Movies</h3>
+  <div class = 'cards'>
+  {% for res  in  similar|slice:":5"  %}
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="https://image.tmdb.org/t/p/w500/{{res.poster_path}}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{res.title}}</h5>
+        <p class="card-text">{{ res.overview }}</p>
+        <a href="/movie/{{res.title}}" class="btn btn-primary">See details</a>
+      </div>
+    </div>
+  {% comment %} <p>{{res.title}}</p> {% endcomment %}
+=======
   <h3 style='color:white'>Similar Movies</h3>
   {% for res  in  similar|slice:":5"  %}
   <div class="card">
@@ -32,7 +46,9 @@
       <small style='text-decoration:none; color:black'>{{ res.overview }}</small>
     </div>
   </div>
+>>>>>>> dev
   {% endfor %}
+  </div>
   <hr />
 
 
