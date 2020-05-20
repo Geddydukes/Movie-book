@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style%}
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+  
+<div class="container">
+  <br>
+  <div class="card">
+    <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        {% for photo in profile.photo_set.all %}
+            <img class="responsive-img card-panel" src="{{photo.url}}" style='max-width:100%'>
+        {% empty %}
+            <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+        {% endfor %}
+        <form action="{% url 'add_photo' profile.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+            {% csrf_token %}
+            <input type="file" name="photo-file">
+            <br><br>
+            <input type="submit" class="btn" value="Upload Photo">
+        </form>
+      </div>
+      <div class="col-md-8">
+        <h5>Display name: {{ user.profile.display_name }} </h5>
+        <h5>Fullname: {{user.profile.first_name}} ,{{ user.profile.last_name }}</h5>
+        <h5>email: {{ user.profile.email }}</h5>
+        <a href="{% url 'edit_profile' profile.id %}" class="btn btn-warning">Edit profile</a>
+        <a href="{% url 'delete_profile' profile.id %}" class="btn btn-danger">Delete profile</a>
+
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="card-body">
+      <div class="row">
+        {% for film in user.profile.films_list.all %}
+        <div class="col-md-4">
+
+          <div class="card mb-4" >
+              <img src="https://image.tmdb.org/t/p/w500/{{ film.poster_path }}" style='max-width:100%' class='card-img-top'/>
+              <div class="card-body">
+                <div class="text-center">
+                  <h2 class="text-center"> {{ film.title }} </h2>
+                    <p>your review and rating</p>
+                      <a href="/movie/{{film.title}}">Read More</a>
+                
+              </div>
+            </div>
+          <div class="card-action">
+            <form action="{% url 'remove_movie' profile.id film.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn">Remove</button>
+            </form>
+          </div> 
+          </div> 
+        </div>
+        {% endfor %} 
+      </div>
+    </div>    
+
+{% endblock  %}

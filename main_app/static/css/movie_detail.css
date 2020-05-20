@@ -1,0 +1,25 @@
+.jumbotron {
+  background-size: cover;
+  height: 500px;
+  color: antiquewhite;
+}
+.card {
+  color: black;
+}
+
+.cards {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+body {
+  background: url(../images/home.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+p {
+  color: white;
+}

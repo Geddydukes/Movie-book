@@ -1,0 +1,68 @@
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+header {
+  display: inline;
+}
+
+a:hover {
+  background: #1b9bff;
+  transition: 0.5s;
+}
+
+/* taken from css tricks for sticky footers */
+
+.footer,
+.push {
+  height: 50px;
+}
+
+.logo {
+  color: white;
+  width: 250px;
+}
+
+.profile button {
+  justify-content: center;
+}
+
+.profile-info {
+  border: 2px solid #919194;
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 150px;
+}
+
+.movie {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.nav-ul {
+  margin-right: 20px;
+  margin-top: 10px;
+}
+
+.nav-li {
+  margin: 15px 20px 0px;
+  display: inline-block;
+  line-height: 60px;
+}
+.welcome {
+  margin-top: 250px;
+  text-align: center;
+  margin-bottom: 150px;
+}
+.wrapper {
+  min-height: 100%;
+  margin-bottom: -50px;
+}
