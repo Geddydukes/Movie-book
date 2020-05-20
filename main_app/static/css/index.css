@@ -1,15 +1,7 @@
 body {
-  /* Krists Luhaers for photo */
   background: url(../images/home.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  /* color: white; */
-}
-
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
 }

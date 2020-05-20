@@ -1,13 +1,36 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block styles%}
-   <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+{% block style%}
+   <link rel="stylesheet" href="{% static 'css/index.css' %}">
 
 {% endblock %}
 
 {% block content%}
-<div class = 'welcome'>  
-    <h2>Welcome To Movie Books </h2>
-       <p> A social media site for movie lovers
+<div class = 'welcome' style='color:white'>  
+    <h2>The Team behind Movie Books </h2>
+       <p> A social media site for movie lovers powered by</p> <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg" alt="TMDB">
 </div>
+
+<div class="card-deck">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Freshta Bashari</h5>
+      <p class="card-text">As a mother and student Freshta is an incredible developer with a great work ethic and a passion for fullstack development. </p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Alvin Wong</h5>
+      <p class="card-text">Hi I am alvin I made this site because I love movies and I wanted to show that in some way. I wanted a site where i can show people my favorite films.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Geddy Dukes</h5>
+      <p class="card-text">Geddy is interested in full stack development and loved working with the TMDb api as a chance to continue building skills with back and front end development.</p>
+    </div>
+  </div>
+</div>
+
 {% endblock %}

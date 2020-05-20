@@ -11,7 +11,7 @@ import uuid
 import boto3
 from .forms import CommentForm, ProfileForm , UserForm ,FilmForm
 
-from tmdbv3api import TMDb, Movie
+from tmdbv3api import TMDb, Movie, TV
 tmdb = TMDb()
 tmdb.api_key = '5cc2c3fe2401b50f702a6631a34199d2'
 tmdb.language = 'en'
@@ -21,7 +21,7 @@ tmdb.debug = True
 
 S3_BASE_URL = 'https://s3.dualstack.us-west-1.amazonaws.com/'
 BUCKET = 'movie-book-profiles'
-# Create your views here.
+
 
 def home(request):
     return render(request, 'home.html')
@@ -33,7 +33,8 @@ def profile(request, profile_id):
     return render(request , 'profile/index.html', {'profile': profile})
 
 
-
+def about_us(request):
+    return render(request, 'about.html')
 
 def signup(request):
     error_message = ''
@@ -54,7 +55,7 @@ def signup(request):
 
 
 
-# logic for uploading photos to AWS S3
+
 def add_photo(request, profile_id):
     photo_file = request.FILES.get('photo-file', None)
     print(photo_file)
@@ -87,23 +88,18 @@ def add_comment_to_movie(request, movie_name):
 
 def edit_profile(request, profile_id):
   profile = Profile.objects.get(id=profile_id)
-  user = User.objects.get(id = profile.user_id)
 
   if request.method == 'POST':
-    user_form = UserForm(request.POST, instance=request.user)
     profile_form = ProfileForm(request.POST, instance=request.user.profile)
-    if user_form .is_valid() and profile_form.is_valid:
-        user_form.save()
+    if profile_form.is_valid:
         profile_form.save()
 
         return redirect('profile', profile_id=profile_id)
    
   else:
-    user_form = UserForm(instance=request.user)
     profile_form = ProfileForm(instance=request.user.profile)
     return render(request, 'profile/edit.html', 
     { 
-    'user_form': user_form,
     'profile_form': profile_form,
     })
 
@@ -178,5 +174,52 @@ def add_movie(request, movie_name):
     Profile.objects.get(user=request.user).films_list.add(new_film)
     return redirect('/')
 
+<<<<<<< HEAD
 
 
+=======
+def remove_movie(request, profile_id ,film_id,):
+    film = Film.objects.get(id=film_id)
+    Profile.objects.get(id=profile_id).films_list.remove(film)
+    return redirect('profile',  profile_id)
+
+
+
+
+
+def tv_show(request):
+    tv = TV()
+    populars = tv.popular()
+    print(populars)
+    context ={
+        'tv': populars,
+    }
+    return render(request , 'tv/index.html' , context)
+
+
+def tv_details(request, tv_name):
+    comment_form = CommentForm()
+    tv = TV()
+    found_tv = tv.search(tv_name)[0]
+    poster_path = found_tv.poster_path[1:]
+    similar = tv.similar(found_tv.id)
+    print(found_tv.id)
+    comments = Comment.objects.filter(film=tv_name)
+    print(found_tv)
+    context = {'tv': found_tv, 
+    'comment_form': comment_form, 
+    'comments': comments, 
+    'poster_path': poster_path,
+    'similar': similar}
+    return render(request, 'tv/details.html', context)
+
+
+
+def add_comment_to_tv(request, tv_title):
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        new_comment = form.save(commit=False)
+        new_comment.film = tv_title
+        new_comment.save()
+        return redirect('tv_details', tv_title=tv_title)
+>>>>>>> dev

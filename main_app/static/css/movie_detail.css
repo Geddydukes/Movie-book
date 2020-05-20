@@ -1,7 +1,7 @@
-.jumbotron{
-    background-size: cover;
-    height: 500px;
-    color: antiquewhite;
+.jumbotron {
+  background-size: cover;
+  height: 500px;
+  color: antiquewhite;
 }
 .card{
     color: black;
@@ -12,6 +12,7 @@
     justify-content: space-evenly;
 }
 
+<<<<<<< HEAD
 body{
     /* Krists Luhaers for photo */
     background: url(../images/home.jpg) no-repeat center center fixed; 
@@ -22,3 +23,16 @@ body{
     color: white;
   }
 
+=======
+body {
+  background: url(../images/home.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+p {
+  color: white;
+}
+>>>>>>> dev

@@ -12,24 +12,23 @@
   <br>
     <div class="card-body">
       <div class="row" >
-        {% for popular in movie %}
-        <div class="col-md-6 mt-5">
+        {% for popular in tv %}
+        <div class="col-md-6">
           <div class="card"  style="width: 100%; height: 100%;">
             <div class="card-body">
               <div class="text-center">
               <img src="https://image.tmdb.org/t/p/w500/{{ popular.poster_path }}" alt="" class="img-fluid" width="80%" height="300px">
-              <h3 class="text-center">{{popular.title}}</h3>
+              <h3 class="text-center">{{popular.name}}</h3>
               <p class="card-text">{{popular.overview}}</p>
               </div>
             </div>
-            <a href="/movie/{{popular.title}}" class="btn btn-primary">Read More</a>
+            <a href="/tv/{{popular.name}}" class="btn btn-primary">Read More</a>
           </div>
            </div>
-         
         {% endfor %} 
       </div>
     </div>
+  </div>
 </div>
 
 {% endblock %}
-
