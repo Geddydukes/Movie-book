@@ -154,7 +154,7 @@ def profile_new(request):
         if form.is_valid():
             profile = form.save(commit=False)
             profile.user = request.user
-            return redirect('/')
+            return redirect('movie_show')
         else:
             error_message = 'Invalid sign up - try again'
     form = ProfileForm()
