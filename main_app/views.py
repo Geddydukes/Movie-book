@@ -174,10 +174,6 @@ def add_movie(request, movie_name):
     Profile.objects.get(user=request.user).films_list.add(new_film)
     return redirect('/')
 
-<<<<<<< HEAD
-
-
-=======
 def remove_movie(request, profile_id ,film_id,):
     film = Film.objects.get(id=film_id)
     Profile.objects.get(id=profile_id).films_list.remove(film)
@@ -222,4 +218,3 @@ def add_comment_to_tv(request, tv_title):
         new_comment.film = tv_title
         new_comment.save()
         return redirect('tv_details', tv_title=tv_title)
->>>>>>> dev
