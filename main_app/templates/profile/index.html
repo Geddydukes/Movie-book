@@ -36,9 +36,6 @@
     </div>
   </div>
 </div>
-  {% comment %} add a loop to loop thruough thir favorite movies {% endcomment %}
-  <!-- <div class="card" id="backdrop"> -->
-  
     <div class="card-body">
       <div class="row">
         {% for film in user.profile.films_list.all %}
@@ -50,20 +47,20 @@
                 <div class="text-center">
                   <h2 class="text-center"> {{ film.title }} </h2>
                     <p>your review and rating</p>
-                      <a href="/movies/{{film.title}}">Read More</a>
+                      <a href="/movie/{{film.title}}">Read More</a>
                 
-
               </div>
             </div>
-          </div>
+          <div class="card-action">
+            <form action="{% url 'remove_movie' profile.id film.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn">Remove</button>
+            </form>
+          </div> 
+          </div> 
         </div>
         {% endfor %} 
       </div>
     </div>    
-
-
-  {% endfor %} 
-
-
 
 {% endblock  %}

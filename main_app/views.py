@@ -21,7 +21,7 @@ tmdb.debug = True
 
 S3_BASE_URL = 'https://s3.dualstack.us-west-1.amazonaws.com/'
 BUCKET = 'movie-book-profiles'
-# Create your views here.
+
 
 def home(request):
     return render(request, 'home.html')
@@ -57,7 +57,7 @@ def signup(request):
 
 
 
-# logic for uploading photos to AWS S3
+
 def add_photo(request, profile_id):
     photo_file = request.FILES.get('photo-file', None)
     print(photo_file)
@@ -175,6 +175,13 @@ def add_movie(request, movie_name):
     new_film.save()
     Profile.objects.get(user=request.user).films_list.add(new_film)
     return redirect('/')
+
+def remove_movie(request, profile_id ,film_id,):
+    film = Film.objects.get(id=film_id)
+    Profile.objects.get(id=profile_id).films_list.remove(film)
+    return redirect('profile',  profile_id)
+
+
 
 
 
