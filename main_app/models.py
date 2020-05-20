@@ -21,7 +21,7 @@ class Profile(models.Model):
     email = models.EmailField()
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    # added the use foriegn key
+
 
     def __str__(self):
         return self.display_name
