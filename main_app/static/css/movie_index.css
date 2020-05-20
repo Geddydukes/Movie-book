@@ -6,13 +6,3 @@ body{
     background-size: cover;
     color: black;
 }
-
-.cards{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-
-}
-.card{
-    margin-top: 20px;
-}
