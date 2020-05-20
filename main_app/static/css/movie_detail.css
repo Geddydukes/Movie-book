@@ -3,6 +3,14 @@
     height: 500px;
     color: antiquewhite;
 }
+.card{
+    color: black;
+}
+
+.cards{
+    display: flex;
+    justify-content: space-evenly;
+}
 
 body{
     /* Krists Luhaers for photo */
@@ -13,3 +21,4 @@ body{
     background-size: cover;
     color: white;
   }
+

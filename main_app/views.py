@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 
 import uuid
 import boto3
-from .forms import CommentForm, ProfileForm , UserForm
+from .forms import CommentForm, ProfileForm , UserForm ,FilmForm
 
 from tmdbv3api import TMDb, Movie
 tmdb = TMDb()
@@ -31,8 +31,6 @@ def profile(request, profile_id):
     profile = User.objects.get(id=profile_id)
 
     return render(request , 'profile/index.html', {'profile': profile})
-
-
 
 
 
@@ -179,3 +177,6 @@ def add_movie(request, movie_name):
     new_film.save()
     Profile.objects.get(user=request.user).films_list.add(new_film)
     return redirect('/')
+
+
+

@@ -23,11 +23,19 @@
   <p>{{ movie.overview }}</p>
   <hr />
   <h3>Similar Movies</h3>
+  <div class = 'cards'>
   {% for res  in  similar|slice:":5"  %}
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="https://image.tmdb.org/t/p/w500/{{res.poster_path}}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{res.title}}</h5>
+        <p class="card-text">{{ res.overview }}</p>
+        <a href="/movie/{{res.title}}" class="btn btn-primary">See details</a>
+      </div>
+    </div>
   {% comment %} <p>{{res.title}}</p> {% endcomment %}
-  <a href="/movie/{{res.title}}"> <p>{{res.title}}</p> </a>
-  <small>{{ res.overview }}</small>
   {% endfor %}
+  </div>
   <hr />
 
   <h5>New Comment</h5>
