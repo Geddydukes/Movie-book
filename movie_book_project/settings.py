@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '=qhsx^@&y+v6gl044@$(_77gdnac$1pdp6f29l0-gew_j1kb1b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['movie-book-one.herokuapp.com']
 
